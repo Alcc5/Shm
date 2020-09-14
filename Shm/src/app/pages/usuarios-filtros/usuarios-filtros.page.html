@@ -1,0 +1,34 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+
+    <ion-title>
+      Filtros
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" strong>Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nome</ion-label>                      
+    <ion-input id="FiltroNome" placeholder="Nome do Usuário" value=""></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>                      
+    <ion-input id="FiltroEmail" placeholder="Email" value=""></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Grupo</ion-label>                      
+    <ion-select id="FiltroGrupo" placeholder="Selecione o Grupo" value="">
+      <ion-select-option value="">Nenhum</ion-select-option>
+      <ion-select-option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nome}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+    <ion-button (click)="pesquisar()" strong><ion-icon name="search-outline"></ion-icon> Filtrar</ion-button>
+  
+</ion-content>

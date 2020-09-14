@@ -1,0 +1,49 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="!showSearchbar" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="!ios && !showSearchbar">Usuários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item-group>
+
+      <ion-col size="12" size-md="6" *ngFor="let usuario of usuarios">
+        <ion-item-sliding [attr.track]="usuario.statusLogin">
+          <ion-item routerLink="/usuarios/usuarios-formulario/{{usuario.id}}">
+            <ion-label>
+              <h3>{{usuario.nome}}</h3>
+              <p>
+                {{usuario.email}}
+              </p>
+              <p>
+                {{usuario.grupo}}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-col>
+
+
+    </ion-item-group>
+  </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" #fab>
+    <ion-fab-button>
+      <ion-icon name="grid-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="secondary" (click)="filtros()">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-fab-button> 
+      <ion-fab-button color="secondary"  routerLink="/usuarios/usuarios-formulario/0">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-fab-button>     
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

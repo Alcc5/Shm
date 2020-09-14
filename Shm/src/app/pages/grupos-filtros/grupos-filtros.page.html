@@ -1,0 +1,22 @@
+<ion-header translucent="true">
+  <ion-toolbar>
+
+    <ion-title>
+      Filtros
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" strong>Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nome</ion-label>                      
+    <ion-input id="FiltroNome" placeholder="Nome do Grupo" value=""></ion-input>
+  </ion-item>
+
+    <ion-button (click)="pesquisar()" strong><ion-icon name="search-outline"></ion-icon> Filtrar</ion-button>
+  
+</ion-content>
