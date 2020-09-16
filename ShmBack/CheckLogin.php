@@ -1,8 +1,6 @@
 <?php
 include "Conn.php";
 
-
-
 class seguranca
 {
     

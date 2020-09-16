@@ -12,12 +12,8 @@ class Cliente{
     private $cidade;
     private $estado;
     private $cep;
-
-    public function Cliente(){}
     
-    public function __construct($id,$ativo,$cnpj,$nomeFantasia,
-    $razaoSocial,$endereco,$complemento,$bairro,$cidade,$estado,$cep){
-        $this->id = $id;
+    public function __construct($ativo, $cnpj, $nomeFantasia, $razaoSocial, $endereco, $complemento, $bairro, $cidade, $estado, $cep){
         $this->ativo = $ativo;
         $this->cnpj = $cnpj;
         $this->nomeFantasia = $nomeFantasia;
@@ -118,4 +114,5 @@ class Cliente{
 		$this->cep = $cep;
     }
 }
+
 ?>
