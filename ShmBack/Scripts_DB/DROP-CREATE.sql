@@ -31,21 +31,20 @@ CREATE TABLE `SHM_Atendimentos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `SHM_Clientes` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ativo` tinyint(1) DEFAULT '0',
-  `cnpj` varchar(14) NOT NULL,
+CREATE TABLE `SHM_Cliente` (
+  `iD` int(11) NOT NULL AUTO_INCREMENT,
   `nomeFantasia` varchar(50) DEFAULT NULL,
   `razaoSocial` varchar(50) DEFAULT NULL,
+  `cnpj` varchar(14) NOT NULL,
   `endereco` varchar(50) DEFAULT NULL,
   `complemento` varchar(20) DEFAULT NULL,
   `bairro` varchar(20) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `estado` char(2) NOT NULL,
-  `cep` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cnpj_UNIQUE` (`cnpj`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+  `pontoAtendimento` int(11) DEFAULT NULL,
+  `ativo` boolean DEFAULT FALSE,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `SHM_ClientePonto` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -88,20 +87,20 @@ CREATE TABLE `SHM_Especializacao` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
-CREATE TABLE `SHM_PontosAtend` (
+CREATE TABLE `SHM_PontoAtend` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cnpj` varchar(14) NOT NULL,
   `nomeFantasia` varchar(50) DEFAULT NULL,
   `razaoSocial` varchar(50) DEFAULT NULL,
+  `cnpj` varchar(14) NOT NULL,
   `endereco` varchar(50) DEFAULT NULL,
   `complemento` varchar(20) DEFAULT NULL,
   `bairro` varchar(20) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `estado` char(2) NOT NULL,
-  `cep` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cnpj_UNIQUE` (`cnpj`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `especialidades` int(11) NOT NULL,
+  `tipo` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `SHM_PontoAtendTelefone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -125,20 +124,17 @@ CREATE TABLE `SHM_PontoPrestador` (
 
 CREATE TABLE `SHM_Prestadores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cpf` varchar(14) NOT NULL,
-  `crm` varchar(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
-  `email` varchar(30) NOT NULL,
+  `crm` varchar(10) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
   `endereco` varchar(50) DEFAULT NULL,
   `complemento` varchar(20) DEFAULT NULL,
   `bairro` varchar(20) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `estado` char(2) NOT NULL,
-  `cep` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cpf_UNIQUE` (`cpf`),
-  UNIQUE KEY `crm_UNIQUE` (`crm`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `email` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `SHM_PrestadoresEsp` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -180,18 +176,16 @@ CREATE TABLE `SHM_UsuarioGrupo` (
 
 CREATE TABLE `SHM_Usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cpf` varchar(14) NOT NULL,
   `nome` varchar(50) NOT NULL,
+  `cpf` varchar(14) NOT NULL,
   `endereco` varchar(50) DEFAULT NULL,
   `complemento` varchar(20) DEFAULT NULL,
   `bairro` varchar(30) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `estado` char(2) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `cep` varchar(8) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `cpf_UNIQUE` (`cpf`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `SHM_UsuariosTelefone` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
