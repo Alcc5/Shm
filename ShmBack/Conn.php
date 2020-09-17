@@ -7,7 +7,7 @@ class Conn
     static $Connect = null;
 
     static $dbServer = [
-         'host' => 'http://shm_dev.mysql.dbaas.com.br/',    
+         'host' => 'shm_dev.mysql.dbaas.com.br',
          'username' => 'shm_dev',    
          'password' => 'S4$DIAS#$%',    
          'database' => 'shm_dev'
@@ -28,11 +28,10 @@ class Conn
                 $options = [
                     1002 => "SET NAMES 'UTF8'",
                 ];
-
                 self::$Connect = new PDO($dsn, self::$dbServer['username'], self::$dbServer['password']);
                 self::$Connect->setAttribute(PDO::ATTR_TIMEOUT, 9000);
-              self::$Connect->exec('SET CHARACTER SET utf8mb4');
-               self::$Connect->exec("SET NAMES utf8");
+                self::$Connect->exec('SET CHARACTER SET utf8mb4');
+                self::$Connect->exec("SET NAMES utf8");
              //   self::$Connect->exec('SET time_zone = \'' . date_default_timezone_get() . '\'');
 
                 self::$Connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
