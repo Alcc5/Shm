@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS `SHM_UsuarioGrupo`;
 DROP TABLE IF EXISTS `SHM_Usuario`;
 DROP TABLE IF EXISTS `SHM_Config`;
 
+
 -- Configurações
 CREATE TABLE `SHM_Config` (
   `smtpSecure` varchar(200) DEFAULT NULL,
