@@ -1,47 +1,82 @@
--- -----------------------------------------------PRESTADORES-------------------------------------------------------------------
-#Insert Prestadores Pontos Atendimento
-INSERT INTO shm_dev.SHM_PontoPrestador VALUES
-(NULL,'1', '1'),
-(NULL,'1', '2'),
-(NULL,'1', '3'),
-(NULL,'2', '1'),
-(NULL,'2', '3');
+#Lista de Especialidades
+INSERT INTO SHM_Especializacoes VALUE
+('1', 'Pediatra');
 
-#Insert Prestadores
-INSERT INTO shm_dev.SHM_Prestadores VALUES
-(NULL, 'Nome', 'CRM', 'CPF', 'Rua 1', 'comp 1', 'Bairro 1', 'Cidade 1', 'SP', 'email');
+select * from SHM_Especializacoes;
 
-#Novo Telefone Prestador
-INSERT INTO shm_dev.SHM_PrestadoresTelefones VALUES
-(NULL, '1', '210937829');
+#insert dos prestadores nos pontos de atendimento
+INSERT INTO SHM_PontosAtendPrestadores VALUE
+('1', '1'),
+('1', '2'),
+('1', '3'),
+('2', '1'),
+('2', '3');
 
-#Update Telefone Prestador
-UPDATE shm_dev.SHM_PrestadoresTelefones SET telefone = '21981682937' WHERE id = '1';
+#insert dos prestadores nos pontos de atendimento
+INSERT INTO SHM_Prestadores VALUE
+(NULL, DEFAULT, 'CPF','CRM', 'Nome3', 'email3', 'Rua 3', 'comp 3', 'Bairro 3', 'Cidade 3', 'RJ','CEP');
 
-#Delete Telefone
-DELETE FROM shm_dev.SHM_PrestadoresTelefones WHERE id = '1';
+#Novo Telefone do Prestador
+INSERT INTO SHM_PrestadoresTelefone VALUE
+('1', 'TELEFONE');
 
-#Insert Especialidades Prestador
-INSERT INTO shm_dev.SHM_PrestadoresEsp VALUES (DEFAULT, '1', '1');
+#Update de Telefone
 
-# Lista Prestadores
+UPDATE SHM_PrestadoresTelefone SET telefone = 'TELEFONE' where id_prestador = 'id do prestador';
+
+#Delete de Telefone
+
+DELETE FROM SHM_PrestadoresTelefone WHERE id_prestador = 'id do prestador' AND telefone = 'TELEFONE';
+
+#insert de especialidades
+INSERT INTO SHM_PrestadoresEsp VALUE
+('1', '2'),
+('1', '3'),
+('2', '4'),
+('2', '2'),
+('3', '2'),
+('1', '4');
+
+('id prestador', 'id especialidade');
+# Lista de prestadores
+
 SELECT p.nome, p.crm, p.cidade,
-group_concat(DISTINCT esp.especializacao SEPARATOR ", ") AS especializacao,
-group_concat(DISTINCT c.nomeFantasia SEPARATOR ", ") AS clientes,
-group_concat(DISTINCT pa.nomeFantasia SEPARATOR ", ") AS pontos
-FROM shm_dev.SHM_Prestadores AS p 
-	JOIN shm_dev.SHM_PrestadoresEsp AS pes
-		ON p.id = pes.prestador
-	JOIN shm_dev.SHM_Especializacao AS esp
-		ON pes.especializacao = esp.id
-	JOIN shm_dev.SHM_ClientePrestador AS cpre
-		ON cpre.prestador = p.id
-	JOIN shm_dev.SHM_Cliente AS c
-		ON c.id = cpre.cliente
-	JOIN shm_dev.SHM_PontoPrestador AS pp
-		ON pp.prestador = p.id
-	JOIN shm_dev.SHM_PontoAtend AS pa
-		ON pp.ponto = pa.id
-GROUP BY(p.id);
+group_concat(DISTINCT esp.especializacao SEPARATOR ", ") AS Especializacao,
+group_concat(DISTINCT c.nomeFantasia SEPARATOR ", ") AS Clientes,
+group_concat(DISTINCT pa.razaoSocial SEPARATOR ", ") AS Pontos
+FROM SHM_Prestadores AS p 
+JOIN SHM_PrestadoresEsp AS pes
+ON p.ID = pes.id_prestador
+JOIN SHM_Especializacoes AS esp
+ON pes.id_esp = esp.id
+JOIN SHM_ClientesPrestadores AS cpre
+ON cpre.id_prestador = p.id
+JOIN SHM_Clientes AS c
+ON c.id = cpre.id_cliente
+JOIN SHM_PontosAtendPrestadores AS pp
+ON pp.id_prestador = p.id
+JOIN SHM_PontosAtend AS pa
+ON pp.id_ponto = pa.id
+WHERE esp.especializacao LIKE '%ESPECIALIZACAO%' AND p.cidade = 'CIDADE' 
+AND pa.razaoSocial = 'RAZAO SOCIAL DO POSTO' AND c.nomeFantasia = 'NOME FANTASIA DO CLIENTE'
+AND p.nome = 'NOME DO PRESTADOR' AND p.crm = 'CRM DO PRESTADOR';
 
-SELECT * FROM shm_dev.SHM_PontoAtend;
+
+#perfil do prestador
+
+SELECT pre.nome,pre.crm, pre.cpf, pre.endereco, pre.complemento, pre.bairro, pre.cidade, pre.estado, pre.email, 
+group_concat(DISTINCT esp.especializacao SEPARATOR ", ") AS Especializacao,
+group_concat(DISTINCT pt.telefone SEPARATOR ", ") AS Telefone,
+group_concat(DISTINCT pa.nomeFantasia SEPARATOR ", ") AS Pontos
+ FROM SHM_Prestadores AS pre
+ JOIN SHM_PrestadoresEsp AS pes
+ON pre.id = pes.id_prestador
+JOIN SHM_Especializacoes AS esp
+ON pes.id_esp = esp.id
+JOIN SHM_PrestadoresTelefone AS pt
+ON pre.id = pt.id_prestador
+JOIN SHM_PontosAtendPrestadores as pap
+ON pre.id = pap.id_prestador
+JOIN SHM_PontosAtend as pa
+ON pa.id = pap.id_ponto
+WHERE pre.id = 'ID DO PRESTADOR';

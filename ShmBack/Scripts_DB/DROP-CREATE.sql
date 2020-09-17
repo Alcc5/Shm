@@ -65,7 +65,7 @@ CREATE TABLE `SHM_UsuarioGrupo` (
 -- Entidades Fortes
 CREATE TABLE `SHM_Clientes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ativo` tinyint(1) DEFAULT '0',
+  `ativo` tinyint(1) DEFAULT '1',
   `cnpj` varchar(14) NOT NULL,
   `nomeFantasia` varchar(50) DEFAULT NULL,
   `razaoSocial` varchar(50) DEFAULT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `SHM_Clientes` (
 
 CREATE TABLE `SHM_Prestadores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ativo` tinyint(1) DEFAULT NULL,
+  `ativo` tinyint(1) DEFAULT '1',
   `cpf` varchar(14) NOT NULL,
   `crm` varchar(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE `SHM_Prestadores` (
 
 CREATE TABLE `SHM_Usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ativo` tinyint(1) DEFAULT NULL,
+  `ativo` tinyint(1) DEFAULT '1',
   `cpf` varchar(14) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `endereco` varchar(50) DEFAULT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE `SHM_Usuarios` (
 
 CREATE TABLE `SHM_PontosAtend` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `ativo` tinyint(1) DEFAULT NULL,
+  `ativo` tinyint(1) DEFAULT '1',
   `cnpj` varchar(14) NOT NULL,
   `nomeFantasia` varchar(50) DEFAULT NULL,
   `razaoSocial` varchar(50) DEFAULT NULL,

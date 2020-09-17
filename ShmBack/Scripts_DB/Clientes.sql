@@ -1,57 +1,61 @@
 -- ----------------------------------------------Clientes-------------------------------------------------------------
-#Lista Clientes
-SELECT nomeFantasia, cidade, ativo FROM shm_dev.SHM_Cliente;
+# lista de clientes
+
+SELECT nomeFantasia,cidade, ativo FROM shm_dev.SHM_Clientes;
 
 #Novo Cliente
-INSERT INTO shm_dev.SHM_Cliente VALUES
-(NULL, 'Cliente 1', 'Razao - Cliente 1', 'CNPJ1', 'Rua 1', 'comp 1', 'Bairro 1', 'Cidade 1', 'SP','1','1'),
-(NULL, 'Cliente 2', 'Razao - Cliente 2', 'CNPJ2', 'Rua 2', 'comp 2', 'Bairro 2', 'Cidade 2', 'RJ','2','0');
-
+INSERT INTO shm_dev.SHM_Clientes VALUE
+(NULL, DEFAULT,'CNPJ1','Cliente 1', 'Razao - Cliente 1',  'Rua 1', 'comp 1', 'Bairro 1', 'Cidade 1', 'SP','24435647'),
+(NULL, DEFAULT,'CNPJ2','Cliente 2', 'Razao - Cliente 2',  'Rua 2', 'comp 2', 'Bairro 2', 'Cidade 2', 'RJ','24433726');
 
 #Novo Telefone de Cliente
-INSERT INTO shm_dev.SHM_ClienteTelefone VALUES(DEFAULT,'1', '210937829');
+INSERT INTO SHM_ClientesTelefone VALUE
+('1', '210937829');
 
 #Update de Telefone
-UPDATE shm_dev.SHM_ClienteTelefone SET Telefone = '21981682937' WHERE id = '1';
+
+UPDATE SHM_ClientesTelefone SET telefone = '21981682937' WHERE id_cliente = '1';
 
 #Delete de Telefone
-DELETE FROM shm_dev.SHM_ClienteTelefone WHERE id = '1';
 
-#Insert Pontos Atendimento
-INSERT INTO shm_dev.SHM_PontoAtend VALUES
-(NULL, 'Ponto 1', 'Razao - ponto 1', 'CNPJ1', 'Rua 1', 'comp 1', 'Bairro 1', 'Cidade 1', 'SP','1','1'),
-(NULL, 'Ponto 2', 'Razao - ponto 2', 'CNPJ2', 'Rua 2', 'comp 2', 'Bairro 2', 'Cidade 2', 'RJ','2','2');
+DELETE FROM SHM_ClientesTelefone WHERE id_cliente = 'id do cliente' AND telefone = 'o numero pra apagar aqui';
 
-#Insert Ponto Atendimento Cliente
-INSERT INTO shm_dev.SHM_ClientePonto VALUES
-(NULL,'1', '1'),
-(NULL,'1', '2'),
-(NULL,'1', '3'),
-(NULL,'2', '1'),
-(NULL,'2', '3');
+#insert ponto de atendimento no cliente
 
-#Insert Cliente Prestador
-INSERT INTO shm_dev.SHM_ClientePrestador VALUES
-(NULL,'1', '1'),
-(NULL,'1', '2'),
-(NULL,'1', '3'),
-(NULL,'2', '1'),
-(NULL,'2', '3');
+INSERT INTO SHM_PontosAtend value
+(NULL, DEFAULT,'CNPJ1','Ponto 1', 'Razao - ponto 1',  'Rua 1', 'comp 1', 'Bairro 1', 'Cidade 1', 'SP','CEP'),
+(NULL, DEFAULT,'CNPJ2','Ponto 2', 'Razao - ponto 2',  'Rua 2', 'comp 2', 'Bairro 2', 'Cidade 2', 'RJ','CEP');
 
-#Ficha Cliente
+INSERT INTO SHM_ClientesPontosAtend VALUE
+('1', '1'),
+('1', '2'),
+('1', '3'),
+('3', '1'),
+('3', '3');
+
+#Insert de prestador no cliente
+INSERT INTO SHM_ClientesPrestadores VALUE
+('1', '1'),
+('1','3'),
+('1','2'),
+('3', '3'),
+('3','2');
+
+#Ficha do cliente
+
 SELECT c.nomeFantasia, c.razaoSocial, c.cnpj, c.endereco, c.complemento, c.bairro, c.cidade, c.estado, c.ativo,
-group_concat(distinct pa.nomeFantasia separator ", ") AS nomePonto,
-group_concat(distinct pre.nome separator ", ") AS prestadores
- FROM shm_dev.SHM_Cliente AS c 
-	JOIN shm_dev.SHM_ClientePonto AS cp
-		ON c.id = cp.cliente
-	JOIN shm_dev.SHM_PontoAtend AS pa
-		ON cp.ponto = pa.id
-	JOIN shm_dev.SHM_ClientePrestador AS cpre
-		ON c.id = cpre.cliente
-	JOIN shm_dev.SHM_Prestadores AS pre
-		ON cpre.prestador = pre.id
-GROUP BY(c.id);
+group_concat(DISTINCT pa.nomeFantasia SEPARATOR ", ") AS Nome_ponto,
+group_concat(DISTINCT pre.nome SEPARATOR ", ") AS Prestadores
+ FROM SHM_Clientes AS c 
+    JOIN SHM_ClientesPontosAtend AS cp
+        ON c.id = cp.id_cliente
+    JOIN SHM_PontosAtend AS pa
+        ON cp.id_ponto = pa.id
+    JOIN SHM_ClientesPrestadores AS cpre
+        ON c.id = cpre.id_cliente
+    JOIN SHM_Prestadores AS pre
+        ON cpre.id_prestador = pre.id
+WHERE c.id = 'id do cliente';
  
-#Pegar crm de cada medico da lista
-SELECT crm FROM shm_dev.SHM_Prestadores WHERE id = 1;
+#pegar o crm de cada medico da lista
+SELECT crm FROM SHM_Prestadores WHERE id = '1';
