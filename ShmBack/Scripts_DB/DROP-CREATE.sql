@@ -19,6 +19,7 @@ DROP TABLE `SHM_UsuarioGrupo`;
 DROP TABLE `SHM_Usuarios`;
 DROP TABLE `SHM_UsuariosTelefone`;
 
+
 CREATE TABLE `SHM_Atendimentos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `local` int(11) NOT NULL,
