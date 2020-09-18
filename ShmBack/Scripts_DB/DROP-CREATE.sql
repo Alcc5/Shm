@@ -136,19 +136,25 @@ CREATE TABLE `SHM_Especializacoes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- Entidades Fracas
-CREATE TABLE `SHM_ClientesPontosAtend` ( 
-     `id_cliente` INT(11) NOT NULL, 
-     `id_ponto`   INT(11) NOT NULL, 
-     FOREIGN KEY (`id_cliente`) REFERENCES shm_dev.SHM_Clientes(`id`), 
-     FOREIGN KEY (`id_ponto`) REFERENCES shm_dev.SHM_PontosAtend(`id`) 
-  ) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
+CREATE TABLE `SHM_ClientesPontosAtend` (
+  `id_cliente` int(11) NOT NULL,
+  `id_ponto` int(11) NOT NULL,
+  `ativo` tinyint(1) DEFAULT '1',
+  KEY `id_cliente` (`id_cliente`),
+  KEY `id_ponto` (`id_ponto`),
+  CONSTRAINT `SHM_ClientesPontosAtend_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `SHM_Clientes` (`id`),
+  CONSTRAINT `SHM_ClientesPontosAtend_ibfk_2` FOREIGN KEY (`id_ponto`) REFERENCES `SHM_PontosAtend` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-CREATE TABLE `SHM_ClientesPrestadores` ( 
-     `id_cliente`   INT(11) NOT NULL, 
-     `id_prestador` INT(11) NOT NULL, 
-     FOREIGN KEY (`id_cliente`) REFERENCES shm_dev.SHM_Clientes(`id`), 
-     FOREIGN KEY (`id_prestador`) REFERENCES shm_dev.SHM_Prestadores(`id`) 
-  ) ENGINE=InnoDB DEFAULT CHARSET=latin1; 
+CREATE TABLE `SHM_ClientesPrestadores` (
+  `id_cliente` int(11) NOT NULL,
+  `id_prestador` int(11) NOT NULL,
+  `ativo` tinyint(1) DEFAULT '1',
+  KEY `id_cliente` (`id_cliente`),
+  KEY `id_prestador` (`id_prestador`),
+  CONSTRAINT `SHM_ClientesPrestadores_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `SHM_Clientes` (`id`),
+  CONSTRAINT `SHM_ClientesPrestadores_ibfk_2` FOREIGN KEY (`id_prestador`) REFERENCES `SHM_Prestadores` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
   
 CREATE TABLE `SHM_ClientesTelefone` ( 
      `id_cliente` INT(11) NOT NULL, 
@@ -170,12 +176,14 @@ CREATE TABLE `SHM_PontosAtendTelefone` (
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
 CREATE TABLE `SHM_PontosAtendPrestadores` (
-  `id_ponto` int(11) NOT NULL, 
-  `id_prestador` int(11) NOT NULL, 
-  FOREIGN KEY (`id_ponto`) REFERENCES shm_dev.SHM_PontosAtend(`id`), 
-  FOREIGN KEY (`id_prestador`) REFERENCES shm_dev.SHM_Prestadores(`id`)
-) ENGINE = InnoDB DEFAULT CHARSET = latin1;
-
+  `id_ponto` int(11) NOT NULL,
+  `id_prestador` int(11) NOT NULL,
+  `ativo` tinyint(1) DEFAULT '1',
+  KEY `id_ponto` (`id_ponto`),
+  KEY `id_prestador` (`id_prestador`),
+  CONSTRAINT `SHM_PontosAtendPrestadores_ibfk_1` FOREIGN KEY (`id_ponto`) REFERENCES `SHM_PontosAtend` (`id`),
+  CONSTRAINT `SHM_PontosAtendPrestadores_ibfk_2` FOREIGN KEY (`id_prestador`) REFERENCES `SHM_Prestadores` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 CREATE TABLE `SHM_PrestadoresEsp` (
   `id_prestador` int(11) NOT NULL, 
   `id_esp` int(11) NOT NULL, 

@@ -27,25 +27,25 @@ INSERT INTO SHM_PontosAtend value
 (NULL, DEFAULT,'CNPJ2','Ponto 2', 'Razao - ponto 2',  'Rua 2', 'comp 2', 'Bairro 2', 'Cidade 2', 'RJ','CEP');
 
 INSERT INTO SHM_ClientesPontosAtend VALUE
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('3', '1'),
-('3', '3');
+#('id cliente', 'id ponto', ativo)
+('17', '4',DEFAULT),
+('18', '5',DEFAULT);
+
+
 
 #Insert de prestador no cliente
 INSERT INTO SHM_ClientesPrestadores VALUE
-('1', '1'),
-('1','3'),
-('1','2'),
-('3', '3'),
-('3','2');
+#('id cliente', 'id prestador',ativo)
+('17', '4',DEFAULT),
+('18','4',DEFAULT),
+('21','4',DEFAULT);
+
 
 #Ficha do cliente
 
 SELECT c.nomeFantasia, c.razaoSocial, c.cnpj, c.endereco, c.complemento, c.bairro, c.cidade, c.estado, c.ativo,
-group_concat(DISTINCT pa.nomeFantasia SEPARATOR ", ") AS Nome_ponto,
-group_concat(DISTINCT pre.nome SEPARATOR ", ") AS Prestadores
+GROUP_CONCAT(DISTINCT pa.nomeFantasia SEPARATOR ", ") AS Nome_ponto,
+GROUP_CONCAT(DISTINCT pre.nome SEPARATOR ", ") AS Prestadores
  FROM SHM_Clientes AS c 
     JOIN SHM_ClientesPontosAtend AS cp
         ON c.id = cp.id_cliente
