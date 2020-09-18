@@ -1,6 +1,6 @@
 <?php
 
-class Cliente{
+class Cliente implements JsonSerializable{
     private $id;
     private $ativo;
     private $cnpj;
@@ -99,6 +99,23 @@ class Cliente{
 
 	public function setCep($cep) {
 		$this->cep = $cep;
+    }
+
+    public function jsonSerialize(){
+      return 
+        [
+            'id'   => $this->getId(),
+            'ativo' => $this->getAtivo(),
+            'cnpj'   => $this->getCnpj(),
+            'nomeFantasia'   => $this->getNomeFantasia(),
+            'razaoSocial'   => $this->getRazaoSocial(),
+            'endereco'   => $this->getEndereco(),
+            'complemento'   => $this->getComplemento(),
+            'bairro'   => $this->getBairro(),
+            'cidade'   => $this->getCidade(),
+            'estado'   => $this->getEstado(),
+            'cep'   => $this->getCep()
+        ];
     }
 }
 

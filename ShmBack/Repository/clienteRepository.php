@@ -13,8 +13,8 @@ class ClienteRepository {
 /*             $seg = seguranca::check($_GET['tokenUsuario'],$_GET['token'],'3');
             if ( ! session_id() ) @ session_start(); */
             $connection = new Conn();    
-            $db = $connection::getConn(); 
-            $stmt = $db->prepare($sql);    
+            $db = $connection::getConn();
+            $stmt = $db->prepare($sql);
             $result  = array();
             if ($stmt->execute()) {
                 while ($rs = $stmt->fetchObject(Cliente::class)) {
@@ -26,8 +26,12 @@ class ClienteRepository {
             }
             
         } catch (Exception $e){
-            echo $e->errorMessage();
+            echo $e->getTraceAsString();
+
+        } finally{
+            $db = null;
         }
+
         return false;
     }
 
@@ -51,8 +55,12 @@ class ClienteRepository {
             $stmt->bindValue(10, $cliente->getEstado());
             $stmt->bindValue(11, $cliente->getCep());
             return $stmt->execute();
+
         } catch (Exception $e) {
-            echo $e->errorMessage();
+            echo $e->getTraceAsString();
+
+        } finally{
+            $db = null;
         }
     }
 
@@ -75,34 +83,38 @@ class ClienteRepository {
 
             $stmt->bindParam(9,$cliente->getId());
             return $stmt->execute();
+
         } catch (Exception $e) {
-            echo $e->errorMessage();
+            echo $e->getTraceAsString();
+        }
+
+        finally{
+            $db = null;
         }
     }
 
     public function shift($id){
         try {
-            $sql = "CALL SP";
-
+            $sql = "CALL SP_ativaCliente(?)";
 /*             $seg = seguranca::check($_GET['tokenUsuario'],$_GET['token'],'3');
             if ( ! session_id() ) @ session_start(); */
             $connection = new Conn();
             $db = $connection::getConn();
             $stmt = $db->prepare($sql);
-            $stmt->bindParam(1,$ativo);
+            $stmt->bindParam(1,$id);
 
             return $stmt->execute();
+
         } catch (Exception $e) {
-            echo $e->errorMessage();
+            echo $e->getTraceAsString();
+        }
+
+        finally{
+            $db = null;
         }
     }
 
-/*     private function constroiCliente($row) {
-        $pojo = new Cliente();
-        $pojo->setNomeFantasia($row['nomeFantasia']);
-        $pojo->setCidade($row['cidade']);
-        $pojo->setAtivo($row['ativo']);
-        return $pojo;
-    } */
+
+    //Pattern Builder
 }
 ?>
