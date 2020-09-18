@@ -43,8 +43,8 @@ class ClienteRepository {
             $connection = new Conn();    
             $db = $connection::getConn(); 
             $stmt = $db->prepare($sql);
-            $stmt->bindValue(1, $cliente->getId());  
-            $stmt->bindValue(2, $cliente->getAtivo());
+            $stmt->bindValue(1, NULL);  
+            $stmt->bindValue(2, 1);
             $stmt->bindValue(3, $cliente->getCnpj());
             $stmt->bindValue(4, $cliente->getNomeFantasia());
             $stmt->bindValue(5, $cliente->getRazaoSocial());
@@ -93,7 +93,7 @@ class ClienteRepository {
         }
     }
 
-    public function shift($id){
+    public function delete($id){
         try {
             $sql = "CALL SP_ativaCliente(?)";
 /*             $seg = seguranca::check($_GET['tokenUsuario'],$_GET['token'],'3');

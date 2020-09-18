@@ -1,22 +1,23 @@
 <?php
 include "Repository/clienteRepository.php";
-
-
+include "jsonService.php";
 
 class ClienteService{
 
-    //André ['2020-09-17 17:54:43'] Criar service de conversão objeto <-> json
-    public function arrayToJSON($array){
+    public function findAll(){
         $clienteRepository = new ClienteRepository();
-        $array = $clienteRepository::findAll();
-        $jsonArray = null;
-        for($i=0;$i<sizeof($array);$i++){
-            $objeto = $array[$i];
-            $json = json_encode($objeto);
-            $jsonArray = $jsonArray.$json;
-            }
-            return $jsonArray;
+        $jsonService = new JsonService();
+        $clienteRepository = $clienteRepository::findAll();
+        $json = $jsonService::arrayToJson($clienteRepository);
+        return $json;
     }
 
+    public function save($json){
+        $clienteRepository = new ClienteRepository();
+        $jsonService = new JsonService();
+        $objeto = $jsonService::jsonToObject($json,Cliente::class);
+        $resp = $clienteRepository::save($objeto);
+        return $resp;
+    }
+        
 }
-?>
