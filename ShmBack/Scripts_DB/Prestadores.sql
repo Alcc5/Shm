@@ -2,15 +2,17 @@
 INSERT INTO SHM_Especializacoes VALUE
 ('1', 'Pediatra');
 
-select * from SHM_Especializacoes;
 
 #insert dos prestadores nos pontos de atendimento
 INSERT INTO SHM_PontosAtendPrestadores VALUE
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '1'),
-('2', '3');
+#('id ponto', 'id prestador', ativo)
+('1', '1',DEFAULT),
+('1', '2',DEFAULT),
+('1', '3',DEFAULT),
+('2', '1',DEFAULT),
+('2', '3',DEFAULT),
+('4', '4',DEFAULT);
+
 
 #insert dos prestadores nos pontos de atendimento
 INSERT INTO SHM_Prestadores VALUE
@@ -30,6 +32,7 @@ DELETE FROM SHM_PrestadoresTelefone WHERE id_prestador = 'id do prestador' AND t
 
 #insert de especialidades
 INSERT INTO SHM_PrestadoresEsp VALUE
+#('id prestador', 'id especialidade')
 ('1', '2'),
 ('1', '3'),
 ('2', '4'),
@@ -37,13 +40,16 @@ INSERT INTO SHM_PrestadoresEsp VALUE
 ('3', '2'),
 ('1', '4');
 
-('id prestador', 'id especialidade');
+
+
+
+
 # Lista de prestadores
 
 SELECT p.nome, p.crm, p.cidade,
-group_concat(DISTINCT esp.especializacao SEPARATOR ", ") AS Especializacao,
-group_concat(DISTINCT c.nomeFantasia SEPARATOR ", ") AS Clientes,
-group_concat(DISTINCT pa.razaoSocial SEPARATOR ", ") AS Pontos
+GROUP_CONCAT(DISTINCT esp.especializacao SEPARATOR ", ") AS Especializacao,
+GROUP_CONCAT(DISTINCT c.nomeFantasia SEPARATOR ", ") AS Clientes,
+GROUP_CONCAT(DISTINCT pa.razaoSocial SEPARATOR ", ") AS Pontos
 FROM SHM_Prestadores AS p 
 JOIN SHM_PrestadoresEsp AS pes
 ON p.ID = pes.id_prestador
@@ -65,9 +71,9 @@ AND p.nome = 'NOME DO PRESTADOR' AND p.crm = 'CRM DO PRESTADOR';
 #perfil do prestador
 
 SELECT pre.nome,pre.crm, pre.cpf, pre.endereco, pre.complemento, pre.bairro, pre.cidade, pre.estado, pre.email, 
-group_concat(DISTINCT esp.especializacao SEPARATOR ", ") AS Especializacao,
-group_concat(DISTINCT pt.telefone SEPARATOR ", ") AS Telefone,
-group_concat(DISTINCT pa.nomeFantasia SEPARATOR ", ") AS Pontos
+GROUP_CONCAT(DISTINCT esp.especializacao SEPARATOR ", ") AS Especializacao,
+GROUP_CONCAT(DISTINCT pt.telefone SEPARATOR ", ") AS Telefone,
+GROUP_CONCAT(DISTINCT pa.nomeFantasia SEPARATOR ", ") AS Pontos
  FROM SHM_Prestadores AS pre
  JOIN SHM_PrestadoresEsp AS pes
 ON pre.id = pes.id_prestador

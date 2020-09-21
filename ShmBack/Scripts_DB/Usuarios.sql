@@ -19,7 +19,7 @@ INSERT INTO SHM_UsuariosTelefone VALUE
 #Perfil
 
 SELECT usu.ID, usu.Nome, usu.CPF, usu.Endereco, usu.Complemento, usu.Bairro, usu.Cidade, usu.Estado, usu.email,
-group_concat(DISTINCT utel.Telefone SEPARATOR ", ") AS Telefones
+GROUP_CONCAT(DISTINCT utel.Telefone SEPARATOR ", ") AS Telefones
 FROM shm_dev.SHM_Usuarios AS usu
     JOIN shm_dev.SHM_UsuariosTelefone AS utel  
         ON usu.ID = utel.id_usuario
