@@ -115,6 +115,6 @@ class ClienteRepository {
     }
 
 
-    //Pattern Builder
+    //André [2020-09-21 10:10:27]: Implementar o Pattern Builder
 }
 ?>

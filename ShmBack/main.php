@@ -7,7 +7,7 @@ $clienteService = new ClienteService();
 $cliente = new Cliente();
 
 
-//inserir
+//REPOSITORY INSERIR CLIENTE
 /* $cliente->setCnpj('CNPJ20');
 $cliente->setNomeFantasia('Cliente 20');
 $cliente->setRazaoSocial('Razao - Cliente 20');
@@ -20,7 +20,7 @@ $cliente->setCep('3498573498');
 $resposta = $clienteRepo::save($cliente);
 var_dump($resposta); */
 
-//atualizar
+//REPOSITORY ATUALIZAR CLIENTE
 /* $cliente->setId(1);
 $cliente->setNomeFantasia('Cliente 500');
 $cliente->setRazaoSocial('Razao - Cliente 500');
@@ -33,27 +33,27 @@ $cliente->setCep('987654321');
 $resposta = $clienteRepo::update($cliente);
 var_dump($resposta); */
 
-//coverter para JSON e selecionar
-/* $jsonArray = null;
-$rs = $clienteRepo::findAll();
-for($i=0;$i<sizeof($rs);$i++){
-    $objeto = $rs[$i];
-    $json = json_encode($objeto);
-    $jsonArray = $jsonArray.$json;
-    }
-    print_r($jsonArray); */
-
-//deleção lógica
+//REPOSITORY DELEÇÃO LÓGICA CLIENTE
 /* $x = $clienteRepo::shift(17);
 print_r($x); */
 
-//ClienteService listar
+//SERVICE LISTAR CLIENTE
 /* $rs = $clienteService::findAll();
 print_r($rs); */
 
-//ClienteService inserir
-$json = '{"cnpj":"CNPJ8001","nomeFantasia":"Cliente 8001","razaoSocial":"Razao - Cliente 8001","endereco":"Rua 8001","complemento":"comp 8001","bairro":"Bairro 8001","cidade":"Cidade 8001","estado":"SP","cep":"80018001"}';
+//SERVICE INSERIR CLIENTE
+/* $json = '{"cnpj":"CNPJ8002","nomeFantasia":"Cliente 8002","razaoSocial":"Razao - Cliente 8002","endereco":"Rua 8002","complemento":"comp 8002","bairro":"Bairro 8002","cidade":"Cidade 8002","estado":"SP","cep":"80028002"}';
 $x = $clienteService::save($json);
+print_r($x); */
+
+//SERVICE ATUALIZAR CLIENTE
+/* $json = '{"id":"17","nomeFantasia":"Cliente 9000","razaoSocial":"Razao - Cliente 9000","endereco":"Rua 9000","complemento":"comp 9000","bairro":"Bairro 9000","cidade":"Cidade 9000","estado":"TO","cep":"90009000"}';
+$x = $clienteService::update($json);
+print_r($x); */
+
+//SERVICE DELETAR CLIENTE
+$json = '{"id":"17"}';
+$x = $clienteService::delete($json);
 print_r($x);
 
 ?>

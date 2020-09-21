@@ -19,5 +19,20 @@ class ClienteService{
         $resp = $clienteRepository::save($objeto);
         return $resp;
     }
+
+    public function update($json){
+        $clienteRepository = new ClienteRepository();
+        $jsonService = new JsonService();
+        $objeto = $jsonService::jsonToObject($json,Cliente::class);
+        $resp = $clienteRepository::update($objeto);
+        return $resp;
+    }
+
+    public function delete($json){
+        $clienteRepository = new ClienteRepository();
+        $objeto = json_decode($json);
+        $resp = $clienteRepository::delete($objeto->id);
+        return $resp;
+    }
         
 }
