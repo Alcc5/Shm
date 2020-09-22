@@ -1,6 +1,4 @@
 <?php
-/* header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8"); */
 
 include "CheckLogin.php";
 include "Model/cliente.php";
@@ -10,8 +8,6 @@ class ClienteRepository {
     public function findAll(){
         try {
             $sql = "SELECT `*` FROM `SHM_Clientes`";
-/*             $seg = seguranca::check($_GET['tokenUsuario'],$_GET['token'],'3');
-            if ( ! session_id() ) @ session_start(); */
             $connection = new Conn();    
             $db = $connection::getConn();
             $stmt = $db->prepare($sql);
@@ -38,8 +34,6 @@ class ClienteRepository {
     public function save(Cliente $cliente){
         try {
             $sql = "INSERT INTO `SHM_Clientes` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-/*             $seg = seguranca::check($_GET['tokenUsuario'],$_GET['token'],'3');
-            if ( ! session_id() ) @ session_start(); */
             $connection = new Conn();    
             $db = $connection::getConn(); 
             $stmt = $db->prepare($sql);
@@ -67,8 +61,6 @@ class ClienteRepository {
     public function update(Cliente $cliente){
         try {
             $sql = "UPDATE `SHM_Clientes` SET `nomeFantasia` = ?, `razaoSocial` = ?, `endereco` = ?, `complemento` = ?, `bairro` = ?, `cidade` = ?, `estado` = ?, `cep` = ? WHERE `id` = ?";
-/*             $seg = seguranca::check($_GET['tokenUsuario'],$_GET['token'],'3');
-            if ( ! session_id() ) @ session_start(); */
             $connection = new Conn();
             $db = $connection::getConn();
             $stmt = $db->prepare($sql);
@@ -96,8 +88,6 @@ class ClienteRepository {
     public function delete($id){
         try {
             $sql = "CALL SP_ativaCliente(?)";
-/*             $seg = seguranca::check($_GET['tokenUsuario'],$_GET['token'],'3');
-            if ( ! session_id() ) @ session_start(); */
             $connection = new Conn();
             $db = $connection::getConn();
             $stmt = $db->prepare($sql);

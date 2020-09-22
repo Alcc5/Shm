@@ -1,0 +1,9 @@
+allow from all
+Options +Indexes
+Options Indexes FollowSymLinks
+RewriteEngine On
+
+RewriteBase /Projeto_Shm/ShmBack/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php?chamada=$1 [L,QSA,NC]

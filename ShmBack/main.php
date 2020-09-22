@@ -52,8 +52,9 @@ $x = $clienteService::update($json);
 print_r($x); */
 
 //SERVICE DELETAR CLIENTE
-$json = '{"id":"17"}';
+/* $json = '{"id":"17"}';
 $x = $clienteService::delete($json);
-print_r($x);
+print_r($x); */
+
 
 ?>

@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        phpinfo();
-        ?>
-    </body>
-</html>
+<?php
+include "Controller/clienteController.php";
+
+header("Access-Control-Allow-Origin: *");
+//header("Content-Type: application/json; charset=UTF-8");
+
+$base = '/Projeto_Shm/ShmBack/';
+$uri = $_SERVER['REQUEST_URI'];
+$method = $_SERVER['REQUEST_METHOD'];
+
+if($uri == $base . "cliente" && $method == "GET") {
+    echo ClienteController::findAll();  
+}
+else if($uri == $base . "cliente" && $method == "POST") {
+    echo ClienteController::save(file_get_contents('php://input'));  
+}
