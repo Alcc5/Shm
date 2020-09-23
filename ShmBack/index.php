@@ -14,3 +14,9 @@ if($uri == $base . "cliente" && $method == "GET") {
 else if($uri == $base . "cliente" && $method == "POST") {
     echo ClienteController::save(file_get_contents('php://input'));  
 }
+else if($uri == $base . "cliente" && $method == "PUT") {
+    echo ClienteController::update(file_get_contents('php://input'));  
+}
+else if($uri == $base . "cliente/ativo" && $method == "PUT") {
+    echo ClienteController::delete(file_get_contents('php://input'));  
+}

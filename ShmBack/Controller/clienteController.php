@@ -18,16 +18,14 @@ class ClienteController{
         return $clienteService->save($json);
     }
 
-    public function update($json){
+    public static function update($json){
         $clienteService = new ClienteService();
-        $clienteService = $this->update($json);
-        return $clienteService;
+        return $clienteService->update($json);
     }
 
-    public function delete($json){
+    public static function delete($json){
         $clienteService = new ClienteService();
-        $clienteService = $this->delete($json);
-        return $clienteService;
+        return $clienteService->delete($json);
     }
 }
 ?>
