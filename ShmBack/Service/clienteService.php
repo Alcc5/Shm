@@ -1,10 +1,10 @@
 <?php
-include "Repository/clienteRepository.php";
-include "jsonService.php";
+require_once("Repository/clienteRepository.php");
+require_once("jsonService.php");
 
 class ClienteService{
 
-    public function findAll(){
+    public static function findAll(){
         $clienteRepository = new ClienteRepository();
         $jsonService = new JsonService();
         $clienteRepository = $clienteRepository::findAll();
@@ -12,7 +12,7 @@ class ClienteService{
         return $json;
     }
 
-    public function save($json){
+    public static function save($json){
         $clienteRepository = new ClienteRepository();
         $jsonService = new JsonService();
         $objeto = $jsonService::jsonToObject($json,Cliente::class);
@@ -20,7 +20,7 @@ class ClienteService{
         return $resp;
     }
 
-    public function update($json){
+    public static function update($json){
         $clienteRepository = new ClienteRepository();
         $jsonService = new JsonService();
         $objeto = $jsonService::jsonToObject($json,Cliente::class);
@@ -28,7 +28,7 @@ class ClienteService{
         return $resp;
     }
 
-    public function delete($json){
+    public static function delete($json){
         $clienteRepository = new ClienteRepository();
         $objeto = json_decode($json);
         $resp = $clienteRepository::delete($objeto->id);

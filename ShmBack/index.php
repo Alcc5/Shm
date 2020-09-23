@@ -1,5 +1,6 @@
 <?php
 include "Controller/clienteController.php";
+include "Controller/pontoAtendimentoController.php";
 
 header("Access-Control-Allow-Origin: *");
 //header("Content-Type: application/json; charset=UTF-8");
@@ -19,4 +20,17 @@ else if($uri == $base . "cliente" && $method == "PUT") {
 }
 else if($uri == $base . "cliente/ativo" && $method == "PUT") {
     echo ClienteController::delete(file_get_contents('php://input'));  
+}
+
+else if($uri == $base . "ponto" && $method == "GET") {
+    echo PontoAtendimentoController::findAll();  
+}
+else if($uri == $base . "ponto" && $method == "POST") {
+    echo PontoAtendimentoController::save(file_get_contents('php://input'));  
+}
+else if($uri == $base . "ponto" && $method == "PUT") {
+    echo PontoAtendimentoController::update(file_get_contents('php://input'));  
+}
+else if($uri == $base . "ponto/ativo" && $method == "PUT") {
+    echo PontoAtendimentoController::delete(file_get_contents('php://input'));  
 }

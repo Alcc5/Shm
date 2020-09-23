@@ -1,11 +1,11 @@
 <?php
 
-include "CheckLogin.php";
-include "Model/cliente.php";
+require_once("CheckLogin.php");
+require_once("Model/cliente.php");
 
 class ClienteRepository {
 
-    public function findAll(){
+    public static function findAll(){
         try {
             $sql = "SELECT `*` FROM `SHM_Clientes`";
             $connection = new Conn();    
@@ -31,7 +31,7 @@ class ClienteRepository {
         return false;
     }
 
-    public function save(Cliente $cliente){
+    public static function save(Cliente $cliente){
         try {
             $sql = "INSERT INTO `SHM_Clientes` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $connection = new Conn();    
@@ -58,7 +58,7 @@ class ClienteRepository {
         }
     }
 
-    public function update(Cliente $cliente){
+    public static function update(Cliente $cliente){
         try {
             $sql = "UPDATE `SHM_Clientes` SET `nomeFantasia` = ?, `razaoSocial` = ?, `endereco` = ?, `complemento` = ?, `bairro` = ?, `cidade` = ?, `estado` = ?, `cep` = ? WHERE `id` = ?";
             $connection = new Conn();
@@ -85,7 +85,7 @@ class ClienteRepository {
         }
     }
 
-    public function delete($id){
+    public static function delete($id){
         try {
             $sql = "CALL SP_ativaCliente(?)";
             $connection = new Conn();

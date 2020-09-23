@@ -1,7 +1,7 @@
 <?php
 
-include "CheckLogin.php";
-include "Model/pontoAtendimento.php";
+require_once("CheckLogin.php");
+require_once("Model/pontoAtendimento.php");
 
 class PontoAtendimentoRepository {
 
